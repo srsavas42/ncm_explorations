@@ -1,0 +1,8 @@
+{
+  "cache_hits": 0,
+  "finished_at": "2026-11-14T17:11:29.320243+00:00",
+  "new_model_calls": 3,
+  "parity_reference_boards": 2,
+  "parity_trajectories_per_reference": 3,
+  "wall_seconds": 14.728930000012042
+}

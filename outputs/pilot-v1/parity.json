@@ -1,0 +1,20 @@
+{
+  "checks": [
+    {
+      "all_intermediate_tokens_match": true,
+      "codes_match": true,
+      "puzzle_sha256": "6ec71d315019ea6b6dbe9888af271d74cb635abdf69562957a2c22d0fec35dff",
+      "repeat_scores_identical": true,
+      "uninstrumented_final_matches": true
+    },
+    {
+      "all_intermediate_tokens_match": true,
+      "codes_match": true,
+      "puzzle_sha256": "386c05619a2fabb434c38818e1515d276e8703f43edf37b25fcc3534a8984ed6",
+      "repeat_scores_identical": true,
+      "uninstrumented_final_matches": true
+    }
+  ],
+  "identity_hash": "eb17d769a571f1f0fa20beafd36c628df96e1e8b6d9d3c222febbecc324831c6",
+  "passed": true
+}

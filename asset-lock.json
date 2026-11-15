@@ -1,0 +1,77 @@
+{
+  "files": [
+    {
+      "bytes": 1982,
+      "license": "MIT",
+      "path": "assets/checkpoint/config.yaml",
+      "repo": "hazyresearch/ncm-checkpoints",
+      "revision": "d342ce8aaea58830eef3b8ad473664673e41f692",
+      "sha256": "a399820c7adbfd0c6ad6e443a63feb7fe7d35d066fb2981b79440af0b237beec",
+      "source_filename": "sudoku/medium/config.yaml",
+      "url": "https://huggingface.co/hazyresearch/ncm-checkpoints/resolve/d342ce8aaea58830eef3b8ad473664673e41f692/sudoku/medium/config.yaml"
+    },
+    {
+      "bytes": 102560203,
+      "license": "MIT",
+      "path": "assets/checkpoint/generator.pt",
+      "repo": "hazyresearch/ncm-checkpoints",
+      "revision": "d342ce8aaea58830eef3b8ad473664673e41f692",
+      "sha256": "8336b53fa3dcbddd9375374b8b7409feba2c2ae3b5a1fc5167ecd7852b26ae17",
+      "source_filename": "sudoku/medium/generator.pt",
+      "url": "https://huggingface.co/hazyresearch/ncm-checkpoints/resolve/d342ce8aaea58830eef3b8ad473664673e41f692/sudoku/medium/generator.pt"
+    },
+    {
+      "bytes": 59816209,
+      "license": "MIT",
+      "path": "assets/checkpoint/tokenizer.pt",
+      "repo": "hazyresearch/ncm-checkpoints",
+      "revision": "d342ce8aaea58830eef3b8ad473664673e41f692",
+      "sha256": "aca5523a0c477a6f142bfd6c2ba157353c01b1e3f072bb0f75e34b3b75ebc211",
+      "source_filename": "sudoku/medium/tokenizer.pt",
+      "url": "https://huggingface.co/hazyresearch/ncm-checkpoints/resolve/d342ce8aaea58830eef3b8ad473664673e41f692/sudoku/medium/tokenizer.pt"
+    },
+    {
+      "bytes": 372063,
+      "license": "MIT",
+      "path": "assets/dataset/puzzles.pickle",
+      "repo": "hazyresearch/ncm-datasets",
+      "revision": "6580ba41a4b0a976dde876fbe84d25327617b0e6",
+      "sha256": "d49cd2b380bdce748b10a7f0847637b5e160bd107b67f91dca93670b15190871",
+      "source_filename": "sudoku/medium/puzzles.pickle",
+      "url": "https://huggingface.co/datasets/hazyresearch/ncm-datasets/resolve/6580ba41a4b0a976dde876fbe84d25327617b0e6/sudoku/medium/puzzles.pickle"
+    },
+    {
+      "bytes": 364063,
+      "license": "MIT",
+      "path": "assets/dataset/solutions.pickle",
+      "repo": "hazyresearch/ncm-datasets",
+      "revision": "6580ba41a4b0a976dde876fbe84d25327617b0e6",
+      "sha256": "b52de75f5e4642adca58b18967bcd4bbcafa699c61b21ac33ee0fd7389e0d576",
+      "source_filename": "sudoku/medium/solutions.pickle",
+      "url": "https://huggingface.co/datasets/hazyresearch/ncm-datasets/resolve/6580ba41a4b0a976dde876fbe84d25327617b0e6/sudoku/medium/solutions.pickle"
+    },
+    {
+      "bytes": 303,
+      "license": "MIT",
+      "path": "assets/parity/meta.json",
+      "repo": "mrfakename/ncm-webgpu-weights",
+      "revision": "935e8b4de1a77f247eb363a53d0c894f92e49000",
+      "sha256": "8622602727e50c30f6a9f5a4b64b1509aef73906dd9628974bd364d322fcd7a5",
+      "source_filename": "sudoku-medium/meta.json",
+      "url": "https://huggingface.co/mrfakename/ncm-webgpu-weights/resolve/935e8b4de1a77f247eb363a53d0c894f92e49000/sudoku-medium/meta.json"
+    },
+    {
+      "bytes": 9452,
+      "license": "MIT",
+      "path": "assets/parity/fixtures.json",
+      "repo": "mrfakename/ncm-webgpu-weights",
+      "revision": "935e8b4de1a77f247eb363a53d0c894f92e49000",
+      "sha256": "63cc77b8880ed9bed19e5cb864d9d447f88c4c6259e880efae33e0adeae3d932",
+      "source_filename": "sudoku-medium/fixtures.json",
+      "url": "https://huggingface.co/mrfakename/ncm-webgpu-weights/resolve/935e8b4de1a77f247eb363a53d0c894f92e49000/sudoku-medium/fixtures.json"
+    }
+  ],
+  "parity_revision": "935e8b4de1a77f247eb363a53d0c894f92e49000",
+  "upstream_license": "MIT",
+  "upstream_revision": "c70274273f489abc73832b2b98584a8483b6b203"
+}

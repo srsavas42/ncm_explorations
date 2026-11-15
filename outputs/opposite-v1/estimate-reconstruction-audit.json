@@ -1,0 +1,154 @@
+{
+  "all_statistics_match": true,
+  "analysis_source_unchanged": true,
+  "results": {
+    "confirmation": {
+      "original": {
+        "metrics": {
+          "D_control": {
+            "ci95": [
+              0.5726688069468364,
+              0.9112736897263674
+            ],
+            "fraction_positive": 0.89,
+            "mean": 0.7316781869220236,
+            "median": 0.44922744482755655,
+            "ties": 0
+          },
+          "D_rule": {
+            "ci95": [
+              0.6856515140829919,
+              1.0094306008762988
+            ],
+            "fraction_positive": 0.96,
+            "mean": 0.8377918860005835,
+            "median": 0.6256425678730011,
+            "ties": 0
+          },
+          "specificity": {
+            "ci95": [
+              0.04352924872965861,
+              0.17488567344130326
+            ],
+            "fraction_positive": 0.39,
+            "mean": 0.10611369907855987,
+            "median": 0.0,
+            "ties": 35
+          }
+        },
+        "n": 100,
+        "transform": "original"
+      },
+      "renamed": {
+        "metrics": {
+          "D_control": {
+            "ci95": [
+              0.6558360048858449,
+              1.0234976201429962
+            ],
+            "fraction_positive": 0.85,
+            "mean": 0.8318151060678065,
+            "median": 0.6355453878641129,
+            "ties": 0
+          },
+          "D_rule": {
+            "ci95": [
+              0.6682458689732789,
+              1.0262570840818805
+            ],
+            "fraction_positive": 0.87,
+            "mean": 0.8390342604741453,
+            "median": 0.6650509790827831,
+            "ties": 0
+          },
+          "specificity": {
+            "ci95": [
+              -0.08448974972637367,
+              0.08293694736389434
+            ],
+            "fraction_positive": 0.31,
+            "mean": 0.007219154406338928,
+            "median": 0.0,
+            "ties": 37
+          }
+        },
+        "n": 100,
+        "transform": "renamed"
+      }
+    },
+    "pilot": {
+      "original": {
+        "metrics": {
+          "D_control": {
+            "ci95": [
+              0.16204327273493013,
+              0.967560132946819
+            ],
+            "fraction_positive": 0.9,
+            "mean": 0.4964848593498269,
+            "median": 0.35350914796193444,
+            "ties": 0
+          },
+          "D_rule": {
+            "ci95": [
+              0.1649932034003238,
+              0.9695364849517741
+            ],
+            "fraction_positive": 0.9,
+            "mean": 0.501409190458556,
+            "median": 0.3585309684276581,
+            "ties": 0
+          },
+          "specificity": {
+            "ci95": [
+              0.00022625928123792737,
+              0.012198801835378031
+            ],
+            "fraction_positive": 0.4,
+            "mean": 0.004924331108729052,
+            "median": 0.0,
+            "ties": 6
+          }
+        },
+        "n": 10,
+        "transform": "original"
+      },
+      "renamed": {
+        "metrics": {
+          "D_control": {
+            "ci95": [
+              0.2571310321489969,
+              1.2329690805201727
+            ],
+            "fraction_positive": 1.0,
+            "mean": 0.7076122584442298,
+            "median": 0.32539485643307364,
+            "ties": 0
+          },
+          "D_rule": {
+            "ci95": [
+              0.29158602923154836,
+              1.2581169495545326
+            ],
+            "fraction_positive": 1.0,
+            "mean": 0.7377710136274497,
+            "median": 0.4198552295565605,
+            "ties": 0
+          },
+          "specificity": {
+            "ci95": [
+              -0.00487120828280841,
+              0.08500945319732033
+            ],
+            "fraction_positive": 0.5,
+            "mean": 0.030158755183219938,
+            "median": 0.0010684033234913959,
+            "ties": 2
+          }
+        },
+        "n": 10,
+        "transform": "renamed"
+      }
+    }
+  }
+}

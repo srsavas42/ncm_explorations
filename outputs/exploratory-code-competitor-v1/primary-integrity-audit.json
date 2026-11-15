@@ -1,0 +1,15 @@
+{
+  "model_reruns": 0,
+  "paired_target_values_identical": 660,
+  "primary_artifacts": {
+    "confirmation-v1": {
+      "family_table_sha256": "a9fe5330ad5174d3712de3524f82e0787521b96b68fc3c87707b51f03e28c319",
+      "primary_analysis_sha256": "e8649e13abc2cd1aa6e7decaacf665da8c8c724d3e361fc6826c955c2eab48e7"
+    },
+    "pilot-v1": {
+      "family_table_sha256": "fa37b0ab08e58b9a7f3e92b68f6533801a2c17cec20b765627298fad1119d487",
+      "primary_analysis_sha256": "f70e6981846ca4c55a951cfd5ae42dc364d55467307c1583e604556dc8d67826"
+    }
+  },
+  "primary_endpoint_changed": false
+}

@@ -1,0 +1,160 @@
+{
+  "costs": {
+    "cache_bytes": 66211589,
+    "median_board_seconds": 0.8485640500002773,
+    "peak_memory_bytes": 576921600,
+    "selected_planned_trajectories": 800,
+    "total_inference_seconds": 691.9853851001244,
+    "trajectories": 800
+  },
+  "manifest_hash": "c491272a7064b8b753eb5289e8a73551f6e4237fb76894c8a8983b0740080212",
+  "missing": [],
+  "primary": "D_rule; predeclared positive",
+  "renamed_primary_sign_flip": false,
+  "results": {
+    "original": {
+      "D_control": {
+        "ci95": [
+          0.5726688069468364,
+          0.9112736897263674
+        ],
+        "fraction_positive": 0.89,
+        "mean": 0.7316781869220236,
+        "median": 0.44922744482755655,
+        "n": 100,
+        "sd": 0.8505680399133297,
+        "ties": 0
+      },
+      "D_rule": {
+        "ci95": [
+          0.6856515140829919,
+          1.0094306008762988
+        ],
+        "fraction_positive": 0.96,
+        "mean": 0.8377918860005835,
+        "median": 0.6256425678730011,
+        "n": 100,
+        "sd": 0.8220669615286146,
+        "ties": 0
+      },
+      "final_valid_counts": {
+        "control_P": 91,
+        "control_Q": 93,
+        "rule_P": 94,
+        "rule_Q": 97
+      },
+      "pair_stability": {
+        "control_P": {
+          "mean_level": 10.77,
+          "never_stable": 4
+        },
+        "control_Q": {
+          "mean_level": 10.68,
+          "never_stable": 2
+        },
+        "rule_P": {
+          "mean_level": 10.71,
+          "never_stable": 0
+        },
+        "rule_Q": {
+          "mean_level": 10.7,
+          "never_stable": 0
+        }
+      },
+      "specificity": {
+        "ci95": [
+          0.04352924872965861,
+          0.17488567344130326
+        ],
+        "fraction_positive": 0.39,
+        "mean": 0.10611369907855987,
+        "median": 0.0,
+        "n": 100,
+        "sd": 0.33394709076034557,
+        "ties": 35
+      }
+    },
+    "renamed": {
+      "D_control": {
+        "ci95": [
+          0.6558360048858449,
+          1.0234976201429962
+        ],
+        "fraction_positive": 0.85,
+        "mean": 0.8318151060678065,
+        "median": 0.6355453878641129,
+        "n": 100,
+        "sd": 0.9395757201489482,
+        "ties": 0
+      },
+      "D_rule": {
+        "ci95": [
+          0.6682458689732789,
+          1.0262570840818805
+        ],
+        "fraction_positive": 0.87,
+        "mean": 0.8390342604741453,
+        "median": 0.6650509790827831,
+        "n": 100,
+        "sd": 0.9250567170214389,
+        "ties": 0
+      },
+      "final_valid_counts": {
+        "control_P": 95,
+        "control_Q": 91,
+        "rule_P": 92,
+        "rule_Q": 95
+      },
+      "pair_stability": {
+        "control_P": {
+          "mean_level": 10.73,
+          "never_stable": 2
+        },
+        "control_Q": {
+          "mean_level": 10.4,
+          "never_stable": 1
+        },
+        "rule_P": {
+          "mean_level": 10.38,
+          "never_stable": 0
+        },
+        "rule_Q": {
+          "mean_level": 10.48,
+          "never_stable": 0
+        }
+      },
+      "specificity": {
+        "ci95": [
+          -0.08448974972637367,
+          0.08293694736389434
+        ],
+        "fraction_positive": 0.31,
+        "mean": 0.007219154406338928,
+        "median": 0.0,
+        "n": 100,
+        "sd": 0.4205854118145338,
+        "ties": 37
+      }
+    }
+  },
+  "secondary": "D_rule minus D_control",
+  "source_yield": {
+    "Target row/column also forces d": 47,
+    "accepted_confirmation": 100,
+    "accepted_pilot": 10,
+    "candidates_attempted": 157,
+    "fresh_source_families": 221,
+    "geometry_eligible_candidates": 358,
+    "no_eligible_quadruplet": 111,
+    "no_valid_quadruplet": 47,
+    "prior_or_engineering_family": 30,
+    "removal_extra_solutions_rejected": 592,
+    "removal_local_labels_rejected": 639,
+    "selected_families": 110,
+    "source_rows_scanned": 251,
+    "total_source_rows": 2000
+  },
+  "split": "confirmation",
+  "status": "complete",
+  "study": "opposite-answer-v1"
+}

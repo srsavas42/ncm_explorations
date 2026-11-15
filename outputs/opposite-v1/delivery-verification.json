@@ -1,0 +1,12 @@
+{
+  "all_csv_statistics_reconstructed": true,
+  "fresh_families": 110,
+  "frozen_analysis_source_unchanged": true,
+  "generator_probabilities_collected": false,
+  "missing_study_trajectories": 0,
+  "previous_study_files_unchanged": true,
+  "study_trajectories": 888,
+  "tests_passed": 42,
+  "unique_arm_boards_original": 440,
+  "whole_box_preserved_controls": 220
+}

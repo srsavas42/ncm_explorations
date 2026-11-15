@@ -1,0 +1,130 @@
+{
+  "assets": {
+    "files": [
+      {
+        "bytes": 1982,
+        "license": "MIT",
+        "path": "assets/checkpoint/config.yaml",
+        "repo": "hazyresearch/ncm-checkpoints",
+        "revision": "d342ce8aaea58830eef3b8ad473664673e41f692",
+        "sha256": "a399820c7adbfd0c6ad6e443a63feb7fe7d35d066fb2981b79440af0b237beec",
+        "source_filename": "sudoku/medium/config.yaml",
+        "url": "https://huggingface.co/hazyresearch/ncm-checkpoints/resolve/d342ce8aaea58830eef3b8ad473664673e41f692/sudoku/medium/config.yaml"
+      },
+      {
+        "bytes": 102560203,
+        "license": "MIT",
+        "path": "assets/checkpoint/generator.pt",
+        "repo": "hazyresearch/ncm-checkpoints",
+        "revision": "d342ce8aaea58830eef3b8ad473664673e41f692",
+        "sha256": "8336b53fa3dcbddd9375374b8b7409feba2c2ae3b5a1fc5167ecd7852b26ae17",
+        "source_filename": "sudoku/medium/generator.pt",
+        "url": "https://huggingface.co/hazyresearch/ncm-checkpoints/resolve/d342ce8aaea58830eef3b8ad473664673e41f692/sudoku/medium/generator.pt"
+      },
+      {
+        "bytes": 59816209,
+        "license": "MIT",
+        "path": "assets/checkpoint/tokenizer.pt",
+        "repo": "hazyresearch/ncm-checkpoints",
+        "revision": "d342ce8aaea58830eef3b8ad473664673e41f692",
+        "sha256": "aca5523a0c477a6f142bfd6c2ba157353c01b1e3f072bb0f75e34b3b75ebc211",
+        "source_filename": "sudoku/medium/tokenizer.pt",
+        "url": "https://huggingface.co/hazyresearch/ncm-checkpoints/resolve/d342ce8aaea58830eef3b8ad473664673e41f692/sudoku/medium/tokenizer.pt"
+      },
+      {
+        "bytes": 372063,
+        "license": "MIT",
+        "path": "assets/dataset/puzzles.pickle",
+        "repo": "hazyresearch/ncm-datasets",
+        "revision": "6580ba41a4b0a976dde876fbe84d25327617b0e6",
+        "sha256": "d49cd2b380bdce748b10a7f0847637b5e160bd107b67f91dca93670b15190871",
+        "source_filename": "sudoku/medium/puzzles.pickle",
+        "url": "https://huggingface.co/datasets/hazyresearch/ncm-datasets/resolve/6580ba41a4b0a976dde876fbe84d25327617b0e6/sudoku/medium/puzzles.pickle"
+      },
+      {
+        "bytes": 364063,
+        "license": "MIT",
+        "path": "assets/dataset/solutions.pickle",
+        "repo": "hazyresearch/ncm-datasets",
+        "revision": "6580ba41a4b0a976dde876fbe84d25327617b0e6",
+        "sha256": "b52de75f5e4642adca58b18967bcd4bbcafa699c61b21ac33ee0fd7389e0d576",
+        "source_filename": "sudoku/medium/solutions.pickle",
+        "url": "https://huggingface.co/datasets/hazyresearch/ncm-datasets/resolve/6580ba41a4b0a976dde876fbe84d25327617b0e6/sudoku/medium/solutions.pickle"
+      },
+      {
+        "bytes": 303,
+        "license": "MIT",
+        "path": "assets/parity/meta.json",
+        "repo": "mrfakename/ncm-webgpu-weights",
+        "revision": "935e8b4de1a77f247eb363a53d0c894f92e49000",
+        "sha256": "8622602727e50c30f6a9f5a4b64b1509aef73906dd9628974bd364d322fcd7a5",
+        "source_filename": "sudoku-medium/meta.json",
+        "url": "https://huggingface.co/mrfakename/ncm-webgpu-weights/resolve/935e8b4de1a77f247eb363a53d0c894f92e49000/sudoku-medium/meta.json"
+      },
+      {
+        "bytes": 9452,
+        "license": "MIT",
+        "path": "assets/parity/fixtures.json",
+        "repo": "mrfakename/ncm-webgpu-weights",
+        "revision": "935e8b4de1a77f247eb363a53d0c894f92e49000",
+        "sha256": "63cc77b8880ed9bed19e5cb864d9d447f88c4c6259e880efae33e0adeae3d932",
+        "source_filename": "sudoku-medium/fixtures.json",
+        "url": "https://huggingface.co/mrfakename/ncm-webgpu-weights/resolve/935e8b4de1a77f247eb363a53d0c894f92e49000/sudoku-medium/fixtures.json"
+      }
+    ],
+    "parity_revision": "935e8b4de1a77f247eb363a53d0c894f92e49000",
+    "upstream_license": "MIT",
+    "upstream_revision": "c70274273f489abc73832b2b98584a8483b6b203"
+  },
+  "config": {
+    "model": {
+      "cfg_scale": 0.0,
+      "checkpoint_revision": "d342ce8aaea58830eef3b8ad473664673e41f692",
+      "dataset_revision": "6580ba41a4b0a976dde876fbe84d25327617b0e6",
+      "precision": "float32",
+      "temperature": 0.0,
+      "threads": 4,
+      "top_k": 0,
+      "top_p": 1.0,
+      "upstream_revision": "c70274273f489abc73832b2b98584a8483b6b203"
+    },
+    "study": {
+      "arm_clues": 35,
+      "base_clues": 34,
+      "bootstrap_draws": 10000,
+      "candidate_cap_per_source": 32,
+      "component_sizes": [
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "compute_budget_seconds": 14400,
+      "confirmation_n": 100,
+      "deletion_orders": 3,
+      "early_levels": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "engineering_excluded_rows": [
+        300,
+        330
+      ],
+      "output": "outputs/opposite-v1",
+      "pilot_n": 10,
+      "seed": 2026111402,
+      "source_budget": 2000,
+      "version": 1
+    }
+  },
+  "frozen_at": "2026-11-14T18:45:42.578274+00:00",
+  "primary": "early assignment-preference shift rule_P minus rule_Q; predicted positive",
+  "protocol_text": "# Opposite-answer follow-up \u00b7 protocol v1\n\nThis is a separate behavioral hypothesis. The original experiment and its frozen primary result stand on their own. No model outcomes are used to choose puzzles, locations, edits or matching. This protocol is written before running this follow-up's model trajectories.\n\n## Prediction and endpoints\n\nTwo fixed cells P and Q in one box exchange digits d and e between two valid completed grids. Every rule/control arm is uniquely solvable. P is the lower zero-based cell index; no model outcome determines its label. For each generated level define an assignment preference:\n\n`q(X,k) = 0.5 * [(z(X,k,P,d) - z(X,k,P,e)) - (z(X,k,Q,d) - z(X,k,Q,e))]`.\n\nEach difference compares digits at the same cell, avoiding arbitrary offsets between cells' raw logits. Positive q favors d at P and e at Q; negative q favors the opposite assignment. Average equally over one-based levels 1\u20136, fixed in advance.\n\n**Primary directional endpoint:** `D_rule = mean_early(q(rule_P)) - mean_early(q(rule_Q))`. The predeclared prediction is positive: early preference shifts toward whichever location the box rule forces. Report mean, median, positive fraction, exact ties and a 95% percentile interval from 10,000 seeded whole-family bootstrap draws. This measures responsiveness to the forced answer, not a mechanism.\n\n**Control endpoint:** `D_control = mean_early(q(control_P)) - mean_early(q(control_Q))`, with the same two corresponding solutions and an expected positive direction for appropriate answer sensitivity. Report it separately. **Secondary specificity endpoint:** `D_rule - D_control`. A positive primary alone does not establish a benefit specific to the box deduction. Do not change the primary to the interaction after viewing results.\n\nSecondary readouts include full-vocabulary target winners, the earliest level where both cells' correct assignment remains stable through level 12 (13 if never), final grid validity, accuracy on the changed component, and selected-code first divergence. Read all 12 levels. Retain final Sudoku failures; list engineering failures separately. No adaptive stopping or training.\n\n## Construction\n\nStart from released solutions not used in the prior study. For each pair of digits, connect their occurrences when they share a row, column or box. Swapping d/e on a connected component preserves Sudoku constraints. Allow component sizes 6, 8, 10, 12 or 14; exclude 4-cell rectangles because they cannot provide a remote solution-changing control, and exclude a global 18-cell digit rename.\n\nSelect two component cells P/Q in one box. Build a common 34-clue scaffold that has **exactly two completions**, verified by counting up to three and checking both against the specified grids. Both P and Q have local candidates {d,e}; the box has exactly these two possible locations for each of d and e. The scaffold is intentionally ambiguous and is not a scored inference arm.\n\nBuild four 35-clue puzzles, each adding one clue of the same digit d to that same scaffold:\n\n- `rule_P`: reveal d at a component cell outside the target box that is a peer of Q and not P. The target box then forces d at P.\n- `rule_Q`: the opposite solution, with d at a peer of P and not Q, forcing d at Q.\n- `control_P`: reveal d at a differing component cell outside the peers of **both** P and Q, selecting the P solution while leaving the initial target-box d/e candidate positions unchanged.\n- `control_Q`: the corresponding remote reveal selecting the Q solution, again leaving both locations available initially in the target box.\n\nAll four arms have the same clue count, digit frequencies and common clue scaffold. Exact-check each arm for its distinct intended unique completion. In rule arms, the forced cell must still have {d,e}, so it is not a naked single. In every arm exclude a hidden single for d in the forced cell's row or column. Controls preserve both {d,e} local sets and both d/e box-location sets; they create neither of those named box deductions in the target box. Other deductions elsewhere may exist and are logged as initial forced-cell proxies.\n\n## Geometry matching\n\nRequire **exact matching** of the absolute row and column displacement between the rule edit endpoints and between the control edit endpoints. Also require the same pooled counts of endpoints in the target box's band and stack. Rank survivors first by the L1 mismatch in absolute distances from the target-box center, then by the sum of differences in initially forced-cell counts between corresponding rule/control arms; break ties with the fixed seed. Archive the full geometry and all mismatch components.\n\nThis is not perfect causal isolation: a rule clue must adjoin the eliminated cell, whereas a remote control must avoid both cells' peers. That adjacency difference is necessary to the intervention and cannot be matched away. Residual geometry mismatches are reported rather than concealed or called exact. The four completed puzzles may differ from the original medium difficulty distribution.\n\n## Freshness, selection and budgets\n\nExclude the prior fixture, all prior scanned source families (not merely the selected 110), source rows 0 and 1 used for independent parity, and either completed-grid family of any previously selected new quadruplet. Group solutions using the existing digit-renaming and eight square-dihedral canonicalization; other unknown Sudoku automorphisms are not exhaustively detected. Reject candidates whose alternate completion matches an excluded family.\n\nAlso exclude source rows 300\u2013329, used for model-blind construction engineering, from both study splits. The committed engineering fixture uses source row 300 and is outside both samples. Its model readout is used only to validate the new plotting/reporting path.\n\nThe fixed config seeds source order, target/component order, deletion order and digit permutations. Start from all clues shared by the two completions and greedily remove clues while preserving exactly those two solutions and the target labels. Allow three deletion orders per candidate, at most 32 geometric candidates per source and at most 2,000 source rows. Choose the first qualifying target/component in shuffled order, then the documented endpoint rank. Every family contributes once. Retain rejection and yield denominators.\n\nFreeze up to ten pilot families and the next 100 independent confirmation families in the same preparation, before inspecting any model trace. Keep both solution-family keys reserved across splits. Apply one seeded nonidentity digit permutation consistently to each family; repeats are robustness runs and do not increase n. Eight trajectories per family: four original, four renamed. A complete pilot is 80 trajectories; confirmation is 800. Fixed CPU inference budget is 14,400 seconds per invocation, with cached engineering resumes. If construction falls short, report feasibility at the actual n and retain the source budget; do not relax labels after seeing outcomes.\n\nUse the same pinned frozen model, CPU float32, four threads, deterministic greedy generation, full cumulative readout, vocabulary mapping and independent parity gates. Keep the model adapter unchanged. Record protocol and manifest hashes, revisions, all source and construction provenance, and the selected sample before inference. Reports are rebuilt from saved traces. Confirmation decisions and status are reported separately from the pilot.\n",
+  "secondary": "rule shift minus control shift; no promotion to primary",
+  "selection_hash": "f2d3cef887a54378ad40652efb5ac7104e8df7967a59c23376c7d36c0305fa1d"
+}

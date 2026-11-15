@@ -1,0 +1,17 @@
+{
+  "original_study_files_unchanged": true,
+  "source_artifacts": {
+    "confirmation-v1": {
+      "analysis.json": "e8649e13abc2cd1aa6e7decaacf665da8c8c724d3e361fc6826c955c2eab48e7",
+      "families.json": "499c765c2b61493170c762bf7551a0f4d05277907bb7661cfb12ec0abc71b2dd",
+      "family-analysis.csv": "a9fe5330ad5174d3712de3524f82e0787521b96b68fc3c87707b51f03e28c319",
+      "trace-index.json": "6f17430b8fa8a340ca729dcb0bdec6771286b0504446f6e8aee50ade2f4eeeee"
+    },
+    "pilot-v1": {
+      "analysis.json": "f70e6981846ca4c55a951cfd5ae42dc364d55467307c1583e604556dc8d67826",
+      "families.json": "9acaf7a62d8ed9757836e60fad0ffad58bec4ef49a59b61e0ae7d3ad727e404f",
+      "family-analysis.csv": "fa37b0ab08e58b9a7f3e92b68f6533801a2c17cec20b765627298fad1119d487",
+      "trace-index.json": "e9f66a6d3bad7aa5366c6aff37f9338107cf24fcb739d00c27183bef5e632ca7"
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "boards": [
+    {
+      "arm": "A",
+      "board": "...6.89.....195......34256..597..4.3..6...7.171....85......72.428.4196...45.8....",
+      "family_id": "worked-triplet",
+      "key": "62013646472cefa984e857cc92fb00aa53cc25f534a591b2cd6e429cd2e8339f",
+      "path": "cache/62013646472cefa984e857cc92fb00aa53cc25f534a591b2cd6e429cd2e8339f.npz",
+      "peak_memory_bytes": 575791104,
+      "seconds": 0.9364419999765232,
+      "sha256": "1b25b13b98392bb1765b1c1b07f5d6c79d46c4ced4f677884cf89c6ebf5d6b7e",
+      "status": "complete",
+      "transform": "original"
+    },
+    {
+      "arm": "B",
+      "board": "...6.89...7.195......34256..597..4.3..6...7.171....85.......2.428.4196...45.8....",
+      "family_id": "worked-triplet",
+      "key": "f51c9332e2c60c3ca72563dadb4c4738531ca9da527deb3163b93ffbe6129164",
+      "path": "cache/f51c9332e2c60c3ca72563dadb4c4738531ca9da527deb3163b93ffbe6129164.npz",
+      "peak_memory_bytes": 575791104,
+      "seconds": 0.9119699000148103,
+      "sha256": "eb51c7dff04c01573d331335c2bd81953268be82ddeeabb06eb2eb9d0c5bb6fe",
+      "status": "complete",
+      "transform": "original"
+    },
+    {
+      "arm": "C",
+      "board": "...6789...7.195......34256..59...4.3..6...7.171....85.......2.428.4196...45.8....",
+      "family_id": "worked-triplet",
+      "key": "d90aba3e749578d80bcd07b82ffa2af48d9d137471f0a51a219e3cc736662d63",
+      "path": "cache/d90aba3e749578d80bcd07b82ffa2af48d9d137471f0a51a219e3cc736662d63.npz",
+      "peak_memory_bytes": 575791104,
+      "seconds": 0.9027091000170913,
+      "sha256": "fd0a7383c702ae58106d51b7f07181ed3caa6b84384078470b9df7136179f1a5",
+      "status": "complete",
+      "transform": "original"
+    }
+  ],
+  "identity_hash": "eb17d769a571f1f0fa20beafd36c628df96e1e8b6d9d3c222febbecc324831c6",
+  "manifest_hash": "4a658c0ac921646aaf3afa9bec4f86a75f538b686d1ee676e6f0f00aa4e7b992"
+}

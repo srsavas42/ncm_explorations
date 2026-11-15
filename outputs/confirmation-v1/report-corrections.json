@@ -1,0 +1,9 @@
+{
+  "all_outcome_statistics_identical": true,
+  "corrected_analysis_sha256": "de0c67c9e0ba90eb6b0796b34b2825df3f2ebc5e049b51972e5c079779d4fa84",
+  "family_table_identical": true,
+  "frozen_analysis_sha256": "4f650c2a30c96d01764679666958d6c5837b94980bdd5e663d24a2f6486b7474",
+  "reason": "Rename generic report field pilot_sd to observed_family_sd and label its cohort basis. The confirmation report previously put confirmation SD in a pilot-named field; the frozen decision retains the actual pilot projection.",
+  "sample_early_window_endpoint_unchanged": true,
+  "timestamp": "2026-11-14T17:27:50.985102+00:00"
+}

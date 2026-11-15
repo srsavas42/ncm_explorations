@@ -1,0 +1,19 @@
+{
+  "already_reserved_before_pilot": true,
+  "analysis_source_sha256": "41779c0b8b51887a816eea3e031a0eea0f0a874d30d242328e4756f503aebaa1",
+  "compute_budget_seconds": 14400,
+  "confirmation_n": 100,
+  "decision": "Execute the previously frozen confirmation sample unchanged; observed pilot latency fits the budget.",
+  "early_levels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "estimated_800_trajectory_seconds": 675.8192399982363,
+  "frozen_at": "2026-11-14T18:50:46.540808+00:00",
+  "primary": "D_rule; positive predicted",
+  "selected_manifest_sha256": "248cc3fa0e40fcbc3a1be5a450a4a8fe0c2b7a48e403722da8c8f46b9c2683cf"
+}

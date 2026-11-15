@@ -1,0 +1,167 @@
+{
+  "kind": "predeclared secondary selected-code readout; not an internal mechanism test",
+  "created_at": "2026-11-14T19:04:37.241685+00:00",
+  "split": "confirmation",
+  "manifest_hash": "c491272a7064b8b753eb5289e8a73551f6e4237fb76894c8a8983b0740080212",
+  "index_sha256": "d052251b73c60e31259fc987da99b3cb208f400101da5371bc1f8572b726cf8d",
+  "script_sha256": "5df54773e37291def384779b66a1ab0eb4ef8c505c32995a723ab6b89334a715",
+  "model_reruns": 0,
+  "results": {
+    "original": {
+      "rule_P__rule_Q": {
+        "n": 100,
+        "first_divergence_counts": {
+          "1": 43,
+          "2": 5,
+          "3": 38,
+          "4": 11,
+          "5": 0,
+          "6": 3,
+          "7": 0,
+          "8": 0,
+          "9": 0,
+          "10": 0,
+          "11": 0,
+          "12": 0,
+          "never": 0
+        },
+        "same_prefix_through_6": 0
+      },
+      "control_P__control_Q": {
+        "n": 100,
+        "first_divergence_counts": {
+          "1": 38,
+          "2": 3,
+          "3": 43,
+          "4": 13,
+          "5": 0,
+          "6": 3,
+          "7": 0,
+          "8": 0,
+          "9": 0,
+          "10": 0,
+          "11": 0,
+          "12": 0,
+          "never": 0
+        },
+        "same_prefix_through_6": 0
+      },
+      "rule_P__control_P": {
+        "n": 100,
+        "first_divergence_counts": {
+          "1": 13,
+          "2": 0,
+          "3": 9,
+          "4": 9,
+          "5": 0,
+          "6": 14,
+          "7": 16,
+          "8": 12,
+          "9": 16,
+          "10": 5,
+          "11": 2,
+          "12": 0,
+          "never": 4
+        },
+        "same_prefix_through_6": 55
+      },
+      "rule_Q__control_Q": {
+        "n": 100,
+        "first_divergence_counts": {
+          "1": 11,
+          "2": 0,
+          "3": 7,
+          "4": 8,
+          "5": 0,
+          "6": 11,
+          "7": 18,
+          "8": 14,
+          "9": 14,
+          "10": 5,
+          "11": 4,
+          "12": 1,
+          "never": 7
+        },
+        "same_prefix_through_6": 63
+      }
+    },
+    "renamed": {
+      "rule_P__rule_Q": {
+        "n": 100,
+        "first_divergence_counts": {
+          "1": 34,
+          "2": 6,
+          "3": 48,
+          "4": 10,
+          "5": 0,
+          "6": 2,
+          "7": 0,
+          "8": 0,
+          "9": 0,
+          "10": 0,
+          "11": 0,
+          "12": 0,
+          "never": 0
+        },
+        "same_prefix_through_6": 0
+      },
+      "control_P__control_Q": {
+        "n": 100,
+        "first_divergence_counts": {
+          "1": 40,
+          "2": 6,
+          "3": 43,
+          "4": 8,
+          "5": 0,
+          "6": 3,
+          "7": 0,
+          "8": 0,
+          "9": 0,
+          "10": 0,
+          "11": 0,
+          "12": 0,
+          "never": 0
+        },
+        "same_prefix_through_6": 0
+      },
+      "rule_P__control_P": {
+        "n": 100,
+        "first_divergence_counts": {
+          "1": 10,
+          "2": 0,
+          "3": 8,
+          "4": 11,
+          "5": 0,
+          "6": 14,
+          "7": 9,
+          "8": 16,
+          "9": 16,
+          "10": 8,
+          "11": 4,
+          "12": 0,
+          "never": 4
+        },
+        "same_prefix_through_6": 57
+      },
+      "rule_Q__control_Q": {
+        "n": 100,
+        "first_divergence_counts": {
+          "1": 11,
+          "2": 0,
+          "3": 8,
+          "4": 10,
+          "5": 0,
+          "6": 12,
+          "7": 10,
+          "8": 10,
+          "9": 19,
+          "10": 12,
+          "11": 5,
+          "12": 0,
+          "never": 3
+        },
+        "same_prefix_through_6": 59
+      }
+    }
+  }
+}

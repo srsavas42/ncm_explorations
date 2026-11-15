@@ -1,0 +1,298 @@
+"""Analysis reads saved decoder scores only. It cannot generate predictions."""
+from collections import Counter
+import csv
+import json
+import math
+from pathlib import Path
+import numpy as np
+from .sudoku import parse,candidates,UNITS,DIGITS
+from .storage import outdir,atomic_json,digest,file_hash
+from .cohort import load_manifest,transformed
+
+def margin(trace,cell,digit,rival):
+    z = trace['digit_logits']
+    return z[:,cell,digit-1].astype(float)-z[:,cell,rival-1].astype(float)
+
+def contrast(a,b,c):
+    return {'enabling':float(a-b),'control':float(c-b),'specificity':float(a-c)}
+
+def stable_level(winners,digit):
+    correct = np.asarray(winners) == digit
+    stable = np.logical_and.accumulate(correct[::-1])[::-1]
+    return int(np.flatnonzero(stable)[0]+1) if stable.any() else len(correct)+1
+
+def grid_metrics(trace,board,solution):
+    b,s = parse(board),np.array(parse(solution))
+    blanks = np.array(b) == 0
+    clues = ~blanks
+    legal = candidates(b)
+    rows = []
+    for w in trace['winners']:
+        digits = bool(np.isin(w,list(DIGITS)).all())
+        clue_ok = bool((w[clues] == np.array(b)[clues]).all())
+        unit_ok = all(set(w[list(u)]) == DIGITS for u in UNITS)
+        violations = sum(int(w[i]) not in legal[i] for i in np.flatnonzero(blanks))
+        rows.append({'valid':digits and clue_ok and unit_ok,'digits_only':digits,
+                     'clues_preserved':clue_ok,'units_valid':unit_ok,
+                     'candidate_violations':int(violations),
+                     'blank_accuracy':float((w[blanks] == s[blanks]).mean())})
+    return rows
+
+def family_metrics(f,traces,early):
+    row = {'family_id':f['family_id'],'source_row':f.get('source_row'),
+           'target':f['target'],'digit':f['digit'],'rival':f['rival'],
+           'target_box':(f['target']//27)*3+(f['target']%9)//3,
+           'control_cell_count':len(f.get('control_cells',[])),'missing':False}
+    curves,metrics = {},{}
+    means = {}
+    ix = np.array(early)-1
+    for arm in 'ABC':
+        curves[arm] = margin(traces[arm],f['target'],f['digit'],f['rival'])
+        if max(ix) >= len(curves[arm]):
+            raise ValueError('Early window exceeds hierarchy')
+        means[arm] = float(curves[arm][ix].mean())
+        row['M_'+arm] = means[arm]
+        row['stable_'+arm] = stable_level(traces[arm]['winners'][:,f['target']],f['digit'])
+        metrics[arm] = grid_metrics(traces[arm],f['boards'][arm],f['solution'])
+        row['final_valid_'+arm] = metrics[arm][-1]['valid']
+        row['final_blank_accuracy_'+arm] = metrics[arm][-1]['blank_accuracy']
+    row.update(contrast(means['A'],means['B'],means['C']))
+    row['stable_A_minus_B'] = row['stable_A']-row['stable_B']
+    row['stable_A_minus_C'] = row['stable_A']-row['stable_C']
+    spatial = []
+    for cell in f.get('control_cells',[]):
+        mc = {a:float(margin(traces[a],cell['cell'],cell['digit'],cell['rival'])[ix].mean()) for a in 'ABC'}
+        spatial.append(contrast(mc['A'],mc['B'],mc['C']))
+    for metric in ('enabling','control','specificity'):
+        row['spatial_'+metric] = float(np.mean([c[metric] for c in spatial])) if spatial else None
+    return row,curves,metrics
+
+def summary(values,seed,draws):
+    v = np.array(values,dtype=float)
+    if not len(v):
+        return {'n':0,'mean':None,'median':None,'fraction_positive':None,'ties':0,'ci95':None,'sd':None}
+    rng = np.random.default_rng(seed)
+    # Whole families are the only resampling unit.
+    boots = np.empty(draws)
+    for start in range(0,draws,1000):
+        count = min(1000,draws-start)
+        boots[start:start+count] = v[rng.integers(0,len(v),(count,len(v)))].mean(axis=1)
+    return {'n':len(v),'mean':float(v.mean()),'median':float(np.median(v)),
+            'fraction_positive':float((v>0).mean()),'ties':int((v==0).sum()),
+            'ci95':np.percentile(boots,[2.5,97.5]).tolist(),
+            'sd':float(v.std(ddof=1)) if len(v)>1 else None}
+
+def read_index(output,index,expected_manifest=None):
+    from .runner import read_trace
+    if expected_manifest is not None and index['manifest_hash'] != expected_manifest:
+        raise ValueError('Trace index does not match manifest')
+    plan = json.loads((output/'run-plan.json').read_text())
+    if digest(plan['identity']) != index['identity_hash'] or plan['manifest_hash'] != index['manifest_hash']:
+        raise ValueError('Run plan differs from trace index')
+    result,errors = {},{}
+    for record in index['boards']:
+        key = (record['family_id'],record['transform'],record['arm'])
+        if key in result or key in errors:
+            raise ValueError('Duplicate indexed trajectory')
+        if record['status'] != 'complete':
+            errors[key] = record.get('error','engineering failure')
+            continue
+        try:
+            path = output/record['path']
+            if file_hash(path) != record['sha256']:
+                raise ValueError('Trace content hash mismatch')
+            trace,_ = read_trace(path,record['board'],index['identity_hash'])
+            result[key] = trace
+        except (ValueError,OSError,KeyError) as exc:
+            errors[key] = str(exc)
+    return result,errors
+
+def pyplot():
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    return plt
+
+def fixture_figure(f,index,output):
+    traces,errors = read_index(output,index)
+    if errors or len(traces) != 3:
+        raise ValueError(f'Fixture trace incomplete: {errors}')
+    plt = pyplot()
+    fig,ax = plt.subplots(figsize=(8,4.5))
+    curve_rows = []
+    labels = {'A':'A · deduction available','B':'B · starting board','C':'C · control edit'}
+    styles = {'A':{'marker':'o','markersize':8,'linestyle':'-'},
+              'B':{'marker':'s','markersize':5,'linestyle':'--'},
+              'C':{'marker':'x','markersize':4,'linestyle':':'}}
+    for arm in 'ABC':
+        y = margin(traces[(f['family_id'],'original',arm)],f['target'],f['digit'],f['rival'])
+        ax.plot(np.arange(1,len(y)+1),y,label=labels[arm],**styles[arm])
+        curve_rows.extend({'arm':arm,'level':k+1,'margin':float(value)} for k,value in enumerate(y))
+    ax.axvspan(.5,6.5,color='grey',alpha=.12,label='Predeclared early window')
+    ax.axhline(0,color='grey',linewidth=.7)
+    ax.set(xlabel='Generated level',ylabel='Decoder logit(7) − logit(3)',
+           title='Worked fixture · r8c3 · frozen medium NCM',xticks=range(1,13))
+    ax.legend(fontsize=8)
+    fig.tight_layout()
+    fig.savefig(output/'fixture-margins.png',dpi=170)
+    fig.savefig(output/'fixture-margins.svg')
+    plt.close(fig)
+    write_csv(output/'fixture-curves.csv',curve_rows)
+
+def write_csv(path,rows):
+    if not rows:
+        return
+    fields = list(dict.fromkeys(k for row in rows for k in row))
+    with open(path,'w',newline='',encoding='utf-8') as stream:
+        writer = csv.DictWriter(stream,fieldnames=fields)
+        writer.writeheader()
+        writer.writerows(rows)
+
+def report(cfg):
+    output = outdir(cfg)
+    manifest = load_manifest(cfg)
+    index_path = output/'trace-index.json'
+    index = json.loads(index_path.read_text()) if index_path.exists() else None
+    traces,errors = read_index(output,index,digest(manifest)) if index else ({},{})
+    rows,level_rows,missing = [],[],[]
+    by_transform = {'original':[],'renamed':[]}
+    metric_rows = []
+    for f in manifest['families']:
+        for transform,variant in [('original',f),('renamed',transformed(f))]:
+            absent = [arm for arm in 'ABC' if (f['family_id'],transform,arm) not in traces]
+            if absent:
+                missing.append({'family_id':f['family_id'],'transform':transform,'arms':absent,
+                                'causes':{a:errors.get((f['family_id'],transform,a),'not run') for a in absent}})
+                rows.append({'family_id':f['family_id'],'transform':transform,'missing':True,
+                             'missing_arms':','.join(absent)})
+                continue
+            selected = {a:traces[(f['family_id'],transform,a)] for a in 'ABC'}
+            row,curves,metrics = family_metrics(variant,selected,cfg['study']['early_levels'])
+            row['transform'] = transform
+            rows.append(row)
+            by_transform[transform].append(row)
+            for arm in 'ABC':
+                for k,m in enumerate(curves[arm]):
+                    level_rows.append({'family_id':f['family_id'],'transform':transform,'arm':arm,
+                                       'level':k+1,'margin':float(m)})
+                    metric_rows.append({'family_id':f['family_id'],'transform':transform,'arm':arm,
+                                        'level':k+1,**metrics[arm][k]})
+    results = {}
+    for transform,table in by_transform.items():
+        results[transform] = {metric:summary([r[metric] for r in table],cfg['study']['seed'],
+                                              cfg['study']['bootstrap_draws'])
+                              for metric in ('enabling','control','specificity')}
+        results[transform]['spatial_specificity'] = summary([r['spatial_specificity'] for r in table
+                                      if r['spatial_specificity'] is not None],
+                                      cfg['study']['seed'],cfg['study']['bootstrap_draws'])
+        results[transform]['stability'] = {
+            a:{'mean_level':float(np.mean([r['stable_'+a] for r in table])) if table else None,
+               'never_stable_fraction':float(np.mean([r['stable_'+a] == 13 for r in table])) if table else None}
+            for a in 'ABC'}
+        results[transform]['stability_comparisons'] = {
+            other:{'earlier':sum(r['stable_A'] < r['stable_'+other] for r in table),
+                   'ties':sum(r['stable_A'] == r['stable_'+other] for r in table),
+                   'later':sum(r['stable_A'] > r['stable_'+other] for r in table)} for other in 'BC'}
+        results[transform]['final_valid_counts'] = {a:sum(r['final_valid_'+a] for r in table) for a in 'ABC'}
+    times = [float(t['seconds']) for t in traces.values()]
+    costs = {'completed_trajectories':len(traces),'planned_trajectories':6*len(manifest['families']),
+             'median_board_seconds':float(np.median(times)) if times else None,
+             'total_board_seconds':float(sum(times)),
+             'peak_process_memory_bytes':max((int(t['peak_memory_bytes']) for t in traces.values()),default=None),
+             'cache_bytes':sum((output/r['path']).stat().st_size for r in (index or {}).get('boards',[])
+                                if r['status'] == 'complete' and (output/r['path']).exists())}
+    orig = results['original']['specificity']
+    sd = orig['sd']
+    useful_n = math.ceil((1.96*sd/cfg['study']['precision_goal'])**2) if sd else None
+    precision = {'goal_half_width':cfg['study']['precision_goal'],'pilot_sd':sd,
+                 'projected_n_for_goal':useful_n,'projected_half_width_at_100':1.96*sd/10 if sd else None,
+                 'projected_600_trajectory_seconds':600*costs['median_board_seconds'] if times else None}
+    missing_counts = Counter(arm for item in missing for arm in item['arms'])
+    balance = []
+    for f in manifest['families']:
+        for arm in 'ABC':
+            balance.append({'family_id':f['family_id'],'arm':arm,'digit':f['digit'],
+                            'target':f['target'],'box':(f['target']//27)*3+(f['target']%9)//3,
+                            'edit':json.dumps(f['edits'].get(arm)),
+                            'geometry':json.dumps(f['geometry'].get(arm)),
+                            **{k:v for k,v in f['checks'][arm].items() if k not in ('candidate_masks','target_box_positions')},
+                            **f['matching']})
+    # Descriptive matched subset criterion fixed before outcomes: same removal,
+    # equal row/column counts, geometry L1 <= 6. Never replaces the primary cohort.
+    matched_ids = {f['family_id'] for f in manifest['families'] if f['matching']['different_removed_clue'] == 0
+                   and f['matching']['target_count_l1'] == 0 and f['matching']['geometry_l1'] <= 6}
+    matched = summary([r['specificity'] for r in by_transform['original'] if r['family_id'] in matched_ids],
+                      cfg['study']['seed'],cfg['study']['bootstrap_draws'])
+    sign_flip = bool(orig['n'] and results['renamed']['specificity']['n'] and
+                     orig['mean']*results['renamed']['specificity']['mean'] < 0)
+    analysis = {'split':cfg['study']['split'],'manifest_hash':digest(manifest),'results':results,
+                'cohort_counts':manifest['counts'],'missing':missing,'missing_counts_by_arm':dict(missing_counts),
+                'costs':costs,'precision_planning':precision,'renaming_sign_flip':sign_flip,
+                'matched_subset':matched,'matched_subset_rule':'same removal, equal target counts, geometry L1 <= 6',
+                'status':'complete' if not missing and orig['n'] == cfg['study']['planned_n'] else 'feasibility/exploratory',
+                'baselines':{'local_candidate_contrast':0,'exact_box_rule_contrast':1}}
+    atomic_json(output/'analysis.json',analysis)
+    write_csv(output/'family-analysis.csv',rows)
+    write_csv(output/'level-margins.csv',level_rows)
+    write_csv(output/'level-grid-metrics.csv',metric_rows)
+    write_csv(output/'balance.csv',balance)
+    if level_rows:
+        cohort_figures(output,rows,level_rows,cfg['study']['seed'])
+    text_report(output,analysis)
+    print(json.dumps(analysis,indent=2))
+    return analysis
+
+def cohort_figures(output,rows,levels,seed):
+    plt = pyplot()
+    fig,axes = plt.subplots(1,3,figsize=(14,4))
+    for transform,marker in [('original','o'),('renamed','x')]:
+        selected = [r for r in rows if r['transform'] == transform and not r['missing']]
+        axes[0].scatter(range(len(selected)),[r['specificity'] for r in selected],marker=marker,label=transform,alpha=.7)
+        s = summary([r['specificity'] for r in selected],seed,10000)
+        if s['n']:
+            x = 0 if transform == 'original' else 1
+            axes[1].errorbar(x,s['mean'],yerr=[[s['mean']-s['ci95'][0]],[s['ci95'][1]-s['mean']]],fmt=marker,capsize=5)
+    axes[0].axhline(0,color='grey',linewidth=.7)
+    axes[0].set(xlabel='Family (selection order)',ylabel='Early M(A) − M(C)',title='Paired family effects')
+    axes[0].legend()
+    axes[1].axhline(0,color='grey',linewidth=.7)
+    axes[1].set(xticks=[0,1],xticklabels=['Original','Renamed'],ylabel='Mean M(A) − M(C)',
+                title='95% family bootstrap intervals',xlim=(-.5,1.5))
+    for arm in 'ABC':
+        means = [np.mean([r['margin'] for r in levels if r['transform'] == 'original' and r['arm'] == arm and r['level'] == k]) for k in range(1,13)]
+        axes[2].plot(range(1,13),means,marker='o',label=arm)
+    axes[2].axvspan(.5,6.5,color='grey',alpha=.12)
+    axes[2].set(xlabel='Generated level',ylabel='Mean target margin',title='Original families · descriptive curves')
+    axes[2].legend()
+    fig.tight_layout()
+    fig.savefig(output/'cohort-effects.png',dpi=170)
+    fig.savefig(output/'cohort-effects.svg')
+    plt.close(fig)
+
+def text_report(output,a):
+    r = a['results']
+    def effect(transform,metric):
+        s = r[transform][metric]
+        return f"{s['mean']:.4f} (95% percentile interval {s['ci95'][0]:.4f}, {s['ci95'][1]:.4f}; n={s['n']})" if s['n'] else 'unavailable'
+    lines = [f"# {a['split'].title()} · hidden-single response",'',f"Status: {a['status']}.",'',
+             f"Primary specificity: {effect('original','specificity')}.",
+             f"Enabling A−B: {effect('original','enabling')}; control C−B: {effect('original','control')}.",
+             f"Renamed specificity: {effect('renamed','specificity')}. Sign reversal: {a['renaming_sign_flip']}.",
+             f"Unaffected-cell specificity (one average per family): {r['original']['spatial_specificity']}.",'',
+             f"Yield: {a['cohort_counts']['selected_triplets']} triplets from {a['cohort_counts']['source_rows_scanned']} scanned rows; "
+             f"{a['cohort_counts']['eligible_per_100_scanned_rows']:.2f} per 100.",
+             f"Costs: {json.dumps(a['costs'])}.",
+             f"Precision planning: {json.dumps(a['precision_planning'])}.",
+             f"Missing trajectories by arm: {a['missing_counts_by_arm']}. Engineering failures are excluded as complete triplets, never scored as Sudoku failures.",'',
+             f"Stability and ties: {json.dumps(r['original']['stability_comparisons'])}.",
+             f"Never-stable fractions and mean levels: {json.dumps(r['original']['stability'])}.",
+             f"Final valid counts: {r['original']['final_valid_counts']}. All complete traces enter the primary estimate, including final failures.",
+             f"Closely matched subset: {a['matched_subset']}; criterion: {a['matched_subset_rule']}.",'',
+             'This measures preference strength under selected clue edits. Stable full-vocabulary correctness is a separate endpoint. '
+             'A positive A−C can arise from a decline in C; the A−B component must be read alongside it. '
+             'Spatial controls, digit renaming and balance describe specificity; they cannot identify an internal deduction mechanism. '
+             'Digit renaming and square dihedral duplicates are grouped; other unknown Sudoku automorphisms may remain. '
+             'A wide or near-zero interval leaves the question open. No training or adaptive stopping was used.','',
+             'Reproduce the estimate from family-analysis.csv: filter transform=original and missing=False; average specificity. '
+             'The bootstrap resamples whole family rows, preserving arms and levels. All level curves are descriptive.']
+    (output/'report.md').write_text('\n\n'.join(lines)+'\n',encoding='utf-8')

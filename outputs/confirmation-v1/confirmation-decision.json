@@ -1,0 +1,25 @@
+{
+  "analysis_sha256": "4f650c2a30c96d01764679666958d6c5837b94980bdd5e663d24a2f6486b7474",
+  "compute_budget_seconds": 14400,
+  "decision": "Retain predeclared 100-family target; estimated compute fits budget; no change to early window or selection",
+  "early_levels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "frozen_at": "2026-11-14T17:15:56.866312+00:00",
+  "pilot_planning": {
+    "goal_half_width": 0.5,
+    "pilot_sd": 0.2546022808782507,
+    "projected_600_trajectory_seconds": 544.2247200000565,
+    "projected_half_width_at_100": 0.04990204705213714,
+    "projected_n_for_goal": 1
+  },
+  "planned_n": 100,
+  "precision_goal": 0.5,
+  "sample_cap": 100,
+  "source_budget": 2000
+}

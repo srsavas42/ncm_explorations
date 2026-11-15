@@ -1,0 +1,27 @@
+[study]
+version = 1
+output = "outputs/opposite-v1"
+seed = 2026111402
+pilot_n = 10
+confirmation_n = 100
+source_budget = 2000
+engineering_excluded_rows = [300, 330]
+candidate_cap_per_source = 32
+deletion_orders = 3
+base_clues = 34
+arm_clues = 35
+component_sizes = [6, 8, 10, 12, 14]
+early_levels = [1, 2, 3, 4, 5, 6]
+bootstrap_draws = 10000
+compute_budget_seconds = 14400
+
+[model]
+upstream_revision = "c70274273f489abc73832b2b98584a8483b6b203"
+checkpoint_revision = "d342ce8aaea58830eef3b8ad473664673e41f692"
+dataset_revision = "6580ba41a4b0a976dde876fbe84d25327617b0e6"
+threads = 4
+precision = "float32"
+temperature = 0.0
+top_k = 0
+top_p = 1.0
+cfg_scale = 0.0

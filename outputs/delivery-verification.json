@@ -1,0 +1,8 @@
+{
+  "confirmation_csv_estimate_reproduced": true,
+  "missing_study_trajectories": 0,
+  "reference_parity_passed": true,
+  "same_inference_environment": true,
+  "study_trajectories": 663,
+  "tests_passed": 27
+}

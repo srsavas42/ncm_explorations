@@ -1,0 +1,168 @@
+{
+  "analysis_sha256": "4f650c2a30c96d01764679666958d6c5837b94980bdd5e663d24a2f6486b7474",
+  "family_csv_sha256": "a9fe5330ad5174d3712de3524f82e0787521b96b68fc3c87707b51f03e28c319",
+  "primary": {
+    "original": {
+      "control": {
+        "ci95": [
+          -0.020456458076213793,
+          0.01938140819780528
+        ],
+        "fraction_positive": 0.1,
+        "mean": 0.0006484461079041165,
+        "median": 0.0,
+        "n": 100,
+        "sd": 0.10008201668267624,
+        "ties": 77
+      },
+      "enabling": {
+        "ci95": [
+          -0.053818967552234726,
+          0.011200897725919865
+        ],
+        "fraction_positive": 0.09,
+        "mean": -0.019832853799064954,
+        "median": 0.0,
+        "n": 100,
+        "sd": 0.1640609136648168,
+        "ties": 72
+      },
+      "final_valid_counts": {
+        "A": 94,
+        "B": 94,
+        "C": 95
+      },
+      "spatial_specificity": {
+        "ci95": [
+          -0.03761600521424609,
+          0.001841674805764898
+        ],
+        "fraction_positive": 0.13,
+        "mean": -0.015182267931571743,
+        "median": 0.0,
+        "n": 100,
+        "sd": 0.10224860846003354,
+        "ties": 73
+      },
+      "specificity": {
+        "ci95": [
+          -0.05485835985653102,
+          0.012432047377030055
+        ],
+        "fraction_positive": 0.11,
+        "mean": -0.02048129990696907,
+        "median": 0.0,
+        "n": 100,
+        "sd": 0.1693697050904791,
+        "ties": 73
+      },
+      "stability": {
+        "A": {
+          "mean_level": 9.86,
+          "never_stable_fraction": 0.0
+        },
+        "B": {
+          "mean_level": 9.7,
+          "never_stable_fraction": 0.0
+        },
+        "C": {
+          "mean_level": 9.86,
+          "never_stable_fraction": 0.0
+        }
+      },
+      "stability_comparisons": {
+        "B": {
+          "earlier": 4,
+          "later": 9,
+          "ties": 87
+        },
+        "C": {
+          "earlier": 6,
+          "later": 7,
+          "ties": 87
+        }
+      }
+    },
+    "renamed": {
+      "control": {
+        "ci95": [
+          -0.12228027565032243,
+          -0.001685770911475041
+        ],
+        "fraction_positive": 0.06,
+        "mean": -0.05514895205696423,
+        "median": 0.0,
+        "n": 100,
+        "sd": 0.3069625412667321,
+        "ties": 75
+      },
+      "enabling": {
+        "ci95": [
+          -0.11929415510719021,
+          -0.00932364297037324
+        ],
+        "fraction_positive": 0.06,
+        "mean": -0.05705224479238192,
+        "median": 0.0,
+        "n": 100,
+        "sd": 0.2867649485244532,
+        "ties": 75
+      },
+      "final_valid_counts": {
+        "A": 97,
+        "B": 93,
+        "C": 98
+      },
+      "spatial_specificity": {
+        "ci95": [
+          -0.00045999939881086763,
+          0.018985105916313617
+        ],
+        "fraction_positive": 0.1,
+        "mean": 0.007889627116850116,
+        "median": 0.0,
+        "n": 100,
+        "sd": 0.05003753527944947,
+        "ties": 78
+      },
+      "specificity": {
+        "ci95": [
+          -0.030591209498544537,
+          0.029122053128977605
+        ],
+        "fraction_positive": 0.1,
+        "mean": -0.0019032927354176853,
+        "median": 0.0,
+        "n": 100,
+        "sd": 0.14920849576900205,
+        "ties": 78
+      },
+      "stability": {
+        "A": {
+          "mean_level": 9.43,
+          "never_stable_fraction": 0.0
+        },
+        "B": {
+          "mean_level": 9.5,
+          "never_stable_fraction": 0.01
+        },
+        "C": {
+          "mean_level": 9.55,
+          "never_stable_fraction": 0.0
+        }
+      },
+      "stability_comparisons": {
+        "B": {
+          "earlier": 7,
+          "later": 4,
+          "ties": 89
+        },
+        "C": {
+          "earlier": 7,
+          "later": 6,
+          "ties": 87
+        }
+      }
+    }
+  }
+}
